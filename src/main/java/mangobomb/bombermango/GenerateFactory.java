@@ -51,7 +51,16 @@ public class GenerateFactory implements EntityFactory {
     @Spawns("BG")
     public Entity newBG(SpawnData data) {
         return entityBuilder()
-                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT, Color.GREEN))
+                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT - HelloApplication.SCALED_SIZE*2, Color.GREEN))
+                .at(data.getX(), data.getY())
+                .build();
+    }
+
+    @Spawns("GreyBG")
+    public Entity newGreyBG(SpawnData data) {
+        return entityBuilder()
+                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCALED_SIZE*2, Color.GREY))
+                .at(data.getX(), data.getY())
                 .build();
     }
 

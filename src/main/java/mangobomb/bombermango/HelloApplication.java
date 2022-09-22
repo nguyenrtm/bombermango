@@ -41,7 +41,8 @@ public class HelloApplication extends GameApplication {
     protected void initGame() {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new GenerateFactory());
-        FXGL.getGameWorld().spawn("BG");
+        FXGL.getGameWorld().spawn("BG", 0, SCALED_SIZE*2);
+        FXGL.getGameWorld().spawn("GreyBG", 0, 0);
         player = FXGL.getGameWorld().spawn("Player",SCALED_SIZE*4, SCALED_SIZE*5);
         for (int j = SCALED_SIZE*2; j < SCREEN_HEIGHT; j += SCALED_SIZE) {
             if (j == SCALED_SIZE*2 || j == SCREEN_HEIGHT - SCALED_SIZE) {
