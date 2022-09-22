@@ -32,6 +32,7 @@ public class HelloApplication extends GameApplication {
     protected void initGame() {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new GenerateFactory());
+        FXGL.getGameWorld().spawn("Player");
     }
 
     @Override
