@@ -7,8 +7,10 @@ import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
 import com.almasb.fxgl.texture.AnimationChannel;
+import com.sun.scenario.effect.impl.sw.java.JSWBlend_GREENPeer;
 import javafx.collections.WeakListChangeListener;
 import javafx.geometry.Point2D;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import java.util.List;
@@ -30,18 +32,26 @@ public class GenerateFactory implements EntityFactory {
         ), Duration.seconds(0.5));
 
         return entityBuilder()
-                .at(300, 100)
+                .at(data.getX(), data.getY())
                 .view(new AnimatedTexture(channel).loop())
-                .scale(2,2)
-                .build();
+                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
+                .buildAndAttach();
     }
 
     @Spawns("Wall")
     public Entity newWall(SpawnData data) {
         return entityBuilder()
-                .at(200, 200)
                 .view("sprites/wall.png")
+                .at(data.getX(), data.getY())
+                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .type(WALL)
+                .build();
+    }
+
+    @Spawns("BG")
+    public Entity newBG(SpawnData data) {
+        return entityBuilder()
+                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT, Color.GREEN))
                 .build();
     }
 
@@ -54,9 +64,9 @@ public class GenerateFactory implements EntityFactory {
         ), Duration.seconds(0.5));
 
         return entityBuilder()
-                .at(300, 300)
+                .at(data.getX(), data.getY())
                 .view(new AnimatedTexture(channel).loop())
-                .scale(2,2)
+                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .buildAndAttach();
     }
 

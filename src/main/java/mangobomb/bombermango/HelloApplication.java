@@ -21,10 +21,19 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import java.io.IOException;
 
 public class HelloApplication extends GameApplication {
+    public static final int WIDTH = 19;
+    public static final int HEIGHT = 13;
+    public static final int SCALED_SIZE = 48;
+    public static final int SCREEN_WIDTH = SCALED_SIZE * WIDTH;
+    public static final int SCREEN_HEIGHT = SCALED_SIZE * HEIGHT;
+    public static final int ZOOM_RATIO = 3;
+    public static final int DEFAULT_SIZE = 16;
+
+    public Entity player;
     @Override
     protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(700);
-        gameSettings.setHeight(700);
+        gameSettings.setWidth(SCREEN_WIDTH);
+        gameSettings.setHeight(SCREEN_HEIGHT);
         gameSettings.setTitle("Bomberman!");
     }
 
@@ -32,40 +41,49 @@ public class HelloApplication extends GameApplication {
     protected void initGame() {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new GenerateFactory());
-        FXGL.getGameWorld().spawn("Player");
-        FXGL.getGameWorld().spawn("Wall");
-        FXGL.getGameWorld().spawn("Bomb");
+        FXGL.getGameWorld().spawn("BG");
+        player = FXGL.getGameWorld().spawn("Player",SCALED_SIZE*4, SCALED_SIZE*5);
+        for (int j = SCALED_SIZE*2; j < SCREEN_HEIGHT; j += SCALED_SIZE) {
+            if (j == SCALED_SIZE*2 || j == SCREEN_HEIGHT - SCALED_SIZE) {
+                for (int i = 0; i < SCREEN_WIDTH; i += SCALED_SIZE) {
+                    FXGL.getGameWorld().spawn("Wall", i, j);
+                }
+            } else {
+                if ((j / SCALED_SIZE) % 2 == 0) {
+                    for (int i = 0; i < SCREEN_WIDTH; i += SCALED_SIZE * 2) {
+                        FXGL.getGameWorld().spawn("Wall", i, j);
+                    }
+                } else {
+                    FXGL.getGameWorld().spawn("Wall", 0, j);
+                    FXGL.getGameWorld().spawn("Wall", SCREEN_WIDTH - SCALED_SIZE, j);
+                }
+            }
+        }
+        FXGL.getGameWorld().spawn("Bomb", SCALED_SIZE*2, SCALED_SIZE*9);
     }
 
     @Override
     protected void initInput() {
-        getInput().addAction(new UserAction("Up 1") {
-            @Override
-            protected void onAction() {
-                System.out.println("Up");
-            }
-        }, KeyCode.W);
+        FXGL.onKey(KeyCode.W, () -> {
+            player.translateY(-5);
+        });
 
-        getInput().addAction(new UserAction("Left 1") {
-            @Override
-            protected void onAction() {
-                System.out.println("Left");
-            }
-        }, KeyCode.A);
+        FXGL.onKey(KeyCode.A, () -> {
+            player.translateX(-5);
+        });
 
-        getInput().addAction(new UserAction("Down 1") {
-            @Override
-            protected void onAction() {
-                System.out.println("Down");
-            }
-        }, KeyCode.S);
+        FXGL.onKey(KeyCode.S, () -> {
+            player.translateY(5);
+        });
 
-        getInput().addAction(new UserAction("Right 1") {
-            @Override
-            protected void onAction() {
-                System.out.println("Right");
-            }
-        }, KeyCode.D);
+        FXGL.onKey(KeyCode.D, () -> {
+            player.translateX(5);
+        });
+    }
+
+    @Override
+    protected void initUI() {
+
     }
 
     public static void main(String[] args) {
