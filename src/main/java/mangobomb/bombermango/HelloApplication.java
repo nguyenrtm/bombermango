@@ -33,6 +33,8 @@ public class HelloApplication extends GameApplication {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new GenerateFactory());
         FXGL.getGameWorld().spawn("Player");
+        FXGL.getGameWorld().spawn("Wall");
+        FXGL.getGameWorld().spawn("Bomb");
     }
 
     @Override
@@ -41,7 +43,6 @@ public class HelloApplication extends GameApplication {
             @Override
             protected void onAction() {
                 System.out.println("Up");
-                FXGL.getGameWorld().spawn("Rocket");
             }
         }, KeyCode.W);
 
