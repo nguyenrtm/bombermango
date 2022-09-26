@@ -23,7 +23,7 @@ import static mangobomb.bombermango.BombermanType.WALL;
 
 public class GenerateFactory implements EntityFactory {
 
-    @Spawns("Player")
+    @Spawns("Player, 0")
     public Entity newPlayer(SpawnData data) {
         var channel = new AnimationChannel(List.of(
                 image("sprites/player_left.png"),
@@ -38,7 +38,7 @@ public class GenerateFactory implements EntityFactory {
                 .buildAndAttach();
     }
 
-    @Spawns("Wall")
+    @Spawns("Wall, 1")
     public Entity newWall(SpawnData data) {
         return entityBuilder()
                 .view("sprites/wall.png")

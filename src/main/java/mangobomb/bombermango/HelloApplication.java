@@ -3,6 +3,7 @@ package mangobomb.bombermango;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.input.Input;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -29,7 +30,7 @@ public class HelloApplication extends GameApplication {
     public static final int ZOOM_RATIO = 3;
     public static final int DEFAULT_SIZE = 16;
 
-    public Entity player;
+    public static Entity player;
     @Override
     protected void initSettings(GameSettings gameSettings) {
         gameSettings.setWidth(SCREEN_WIDTH);
@@ -42,49 +43,18 @@ public class HelloApplication extends GameApplication {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new GenerateFactory());
         FXGL.getGameWorld().spawn("BG", 0, SCALED_SIZE*2);
-        FXGL.getGameWorld().spawn("GreyBG", 0, 0);
-        player = FXGL.getGameWorld().spawn("Player",SCALED_SIZE*4, SCALED_SIZE*5);
-        for (int j = SCALED_SIZE*2; j < SCREEN_HEIGHT; j += SCALED_SIZE) {
-            if (j == SCALED_SIZE*2 || j == SCREEN_HEIGHT - SCALED_SIZE) {
-                for (int i = 0; i < SCREEN_WIDTH; i += SCALED_SIZE) {
-                    FXGL.getGameWorld().spawn("Wall", i, j);
-                }
-            } else {
-                if ((j / SCALED_SIZE) % 2 == 0) {
-                    for (int i = 0; i < SCREEN_WIDTH; i += SCALED_SIZE * 2) {
-                        FXGL.getGameWorld().spawn("Wall", i, j);
-                    }
-                } else {
-                    FXGL.getGameWorld().spawn("Wall", 0, j);
-                    FXGL.getGameWorld().spawn("Wall", SCREEN_WIDTH - SCALED_SIZE, j);
-                }
-            }
-        }
-        FXGL.getGameWorld().spawn("Bomb", SCALED_SIZE*2, SCALED_SIZE*9);
+        player = FXGL.getGameWorld().spawn("Player", 0, SCALED_SIZE*2);
     }
 
     @Override
     protected void initInput() {
-        FXGL.onKey(KeyCode.W, () -> {
-            player.translateY(-5);
-        });
+        Input input = getInput();
 
-        FXGL.onKey(KeyCode.A, () -> {
-            player.translateX(-5);
-        });
-
-        FXGL.onKey(KeyCode.S, () -> {
-            player.translateY(5);
-        });
-
-        FXGL.onKey(KeyCode.D, () -> {
-            player.translateX(5);
-        });
-    }
-
-    @Override
-    protected void initUI() {
-
+        input.addAction(InputHandler.moveUp, KeyCode.W);
+        input.addAction(InputHandler.moveRight, KeyCode.D);
+        input.addAction(InputHandler.moveLeft, KeyCode.A);
+        input.addAction(InputHandler.moveDown, KeyCode.S);
+        input.addAction(InputHandler.implantBomb, KeyCode.F);
     }
 
     public static void main(String[] args) {
