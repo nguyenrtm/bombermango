@@ -24,7 +24,7 @@ import static mangobomb.bombermango.BombermanType.*;
 
 public class GenerateFactory implements EntityFactory {
 
-    @Spawns("Player, 0")
+    @Spawns("Player")
     public Entity newPlayer(SpawnData data) {
         var channel = new AnimationChannel(List.of(
                 image("sprites/player_left.png"),
@@ -128,17 +128,17 @@ public class GenerateFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("Brick")
+    @Spawns("Brick,0")
     public Entity newBrick(@NotNull SpawnData data) {
         return entityBuilder()
                 .view("sprites/brick.png")
-                .at(data.getX() + 48, data.getY() + 48)
+                .at(data.getX(), data.getY())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .type(BRICK)
                 .build();
     }
 
-    @Spawns("Wall, 1")
+    @Spawns("Wall,1")
     public Entity newWall(SpawnData data) {
         return entityBuilder()
                 .view("sprites/wall.png")
