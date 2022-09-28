@@ -35,11 +35,15 @@ public class HelloApplication extends GameApplication {
     public static final int DEFAULT_SIZE = 16;
 
     public static Entity player;
+
     @Override
-    protected void initSettings(GameSettings gameSettings) {
-        gameSettings.setWidth(SCREEN_WIDTH);
-        gameSettings.setHeight(SCREEN_HEIGHT);
-        gameSettings.setTitle("Bomberman!");
+    public void initSettings(GameSettings settings) {
+        settings.setWidth(800);
+        settings.setHeight(600);
+        settings.setTitle("Bomberman");
+        settings.setMainMenuEnabled(true);
+        settings.setGameMenuEnabled(true);
+
     }
 
     @Override
