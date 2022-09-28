@@ -53,7 +53,7 @@ public class HelloApplication extends GameApplication {
         FXGL.getGameWorld().spawn("BG", 0, SCALED_SIZE*2);
         Level level1 = getAssetLoader().loadLevel("test.txt", new TextLevelLoader(48, 48, ' '));
         FXGL.getGameWorld().setLevel(level1);
-        player = FXGL.getGameWorld().spawn("Player", 0, SCALED_SIZE*2);
+        player = FXGL.getGameWorld().spawn("Player", SCALED_SIZE, SCALED_SIZE*3);
         Viewport viewport = getGameScene().getViewport();
         viewport.bindToEntity(player, 200, 100);
         viewport.setBounds(0, 0, SCALED_SIZE * 21, SCALED_SIZE * 13);
