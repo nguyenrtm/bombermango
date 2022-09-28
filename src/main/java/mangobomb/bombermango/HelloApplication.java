@@ -2,10 +2,14 @@ package mangobomb.bombermango;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.level.Level;
+import com.almasb.fxgl.entity.level.text.TextLevelLoader;
 import com.almasb.fxgl.input.Input;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.almasb.fxgl.entity.Entity;
@@ -22,8 +26,8 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 import java.io.IOException;
 
 public class HelloApplication extends GameApplication {
-    public static final int WIDTH = 19;
-    public static final int HEIGHT = 13;
+    public static final int WIDTH = 16;
+    public static final int HEIGHT = 12;
     public static final int SCALED_SIZE = 48;
     public static final int SCREEN_WIDTH = SCALED_SIZE * WIDTH;
     public static final int SCREEN_HEIGHT = SCALED_SIZE * HEIGHT;
@@ -47,7 +51,12 @@ public class HelloApplication extends GameApplication {
         super.initGame();
         FXGL.getGameWorld().addEntityFactory(new GenerateFactory());
         FXGL.getGameWorld().spawn("BG", 0, SCALED_SIZE*2);
+        Level level1 = getAssetLoader().loadLevel("test.txt", new TextLevelLoader(48, 48, ' '));
+        FXGL.getGameWorld().setLevel(level1);
         player = FXGL.getGameWorld().spawn("Player", 0, SCALED_SIZE*2);
+        Viewport viewport = getGameScene().getViewport();
+        viewport.bindToEntity(player, 200, 100);
+        viewport.setBounds(0, 0, SCALED_SIZE * 21, SCALED_SIZE * 13);
     }
 
     @Override
