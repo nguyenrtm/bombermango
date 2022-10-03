@@ -1,11 +1,15 @@
 package mangobomb.bombermango;
 
+import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
 import com.almasb.fxgl.entity.Spawns;
+import com.almasb.fxgl.entity.components.CollidableComponent;
+import com.almasb.fxgl.pathfinding.CellMoveComponent;
+import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.sun.scenario.effect.impl.sw.java.JSWBlend_GREENPeer;
 import javafx.collections.WeakListChangeListener;
@@ -13,6 +17,8 @@ import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+
+import java.awt.*;
 import java.util.List;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -27,15 +33,20 @@ public class GenerateFactory implements EntityFactory {
     @Spawns("Player")
     public Entity newPlayer(SpawnData data) {
         var channel = new AnimationChannel(List.of(
-                image("sprites/player_left.png"),
-                image("sprites/player_left_1.png"),
-                image("sprites/player_left_2.png")
+                image("sprites/player_down.png"),
+                image("sprites/player_down_1.png"),
+                image("sprites/player_down_2.png")
         ), Duration.seconds(0.5));
 
-        return entityBuilder()
-                .at(data.getX(), data.getY())
+        FXGL.<HelloApplication>getAppCast();
+        return entityBuilder(data)
+                .atAnchored(new Point2D(24, 24), new Point2D(72, 168))
+                .type(PLAYER)
                 .view(new AnimatedTexture(channel).loop())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
+                .with(new CellMoveComponent(HelloApplication.SCALED_SIZE, HelloApplication.SCALED_SIZE,150))
+                .with(new AStarMoveComponent(FXGL.<HelloApplication>getAppCast().getGrid()))
+                .with(new PlayerComponent())
                 .buildAndAttach();
     }
 
@@ -129,39 +140,34 @@ public class GenerateFactory implements EntityFactory {
     }
 
     @Spawns("Brick,0")
-    public Entity newBrick(@NotNull SpawnData data) {
-        return entityBuilder()
-                .view("sprites/brick.png")
-                .at(data.getX(), data.getY())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
+    public Entity newBrick(SpawnData data) {
+        return entityBuilder(data)
+                .viewWithBBox(texture("sprites/brick.png", 48, 48))
                 .type(BRICK)
                 .build();
     }
 
     @Spawns("Wall,1")
     public Entity newWall(SpawnData data) {
-        return entityBuilder()
-                .view("sprites/wall.png")
-                .at(data.getX(), data.getY())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
+        return entityBuilder(data)
+                .viewWithBBox(texture("sprites/wall.png", 48, 48))
                 .type(WALL)
                 .build();
     }
 
     @Spawns("BG,2")
     public Entity BG(SpawnData data) {
-        return entityBuilder()
+        return entityBuilder(data)
                 .view("sprites/grass.png")
-                .at(data.getX(), data.getY())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .build();
     }
 
     @Spawns("GreyBG,3")
     public Entity newGreyBG(SpawnData data) {
-        return entityBuilder()
+        return entityBuilder(data)
                 .view(new Rectangle(HelloApplication.SCALED_SIZE, HelloApplication.SCALED_SIZE, Color.GREY))
-                .at(data.getX(), data.getY())
+                .type(BG)
                 .build();
     }
 
