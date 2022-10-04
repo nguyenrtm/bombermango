@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static mangobomb.bombermango.BombermanType.*;
+import static mangobomb.bombermango.HelloApplication.SCALED_SIZE;
 
 public class GenerateFactory implements EntityFactory {
 
@@ -42,9 +43,10 @@ public class GenerateFactory implements EntityFactory {
         return entityBuilder(data)
                 .atAnchored(new Point2D(24, 24), new Point2D(72, 168))
                 .type(PLAYER)
+                .zIndex(10)
                 .view(new AnimatedTexture(channel).loop())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .with(new CellMoveComponent(HelloApplication.SCALED_SIZE, HelloApplication.SCALED_SIZE,150))
+                .with(new CellMoveComponent(SCALED_SIZE, SCALED_SIZE,150))
                 .with(new AStarMoveComponent(FXGL.<HelloApplication>getAppCast().getGrid()))
                 .with(new PlayerComponent())
                 .buildAndAttach();
@@ -166,7 +168,7 @@ public class GenerateFactory implements EntityFactory {
     @Spawns("GreyBG,3")
     public Entity newGreyBG(SpawnData data) {
         return entityBuilder(data)
-                .view(new Rectangle(HelloApplication.SCALED_SIZE, HelloApplication.SCALED_SIZE, Color.GREY))
+                .view(new Rectangle(SCALED_SIZE, SCALED_SIZE, Color.GREY))
                 .type(BG)
                 .build();
     }
@@ -180,7 +182,8 @@ public class GenerateFactory implements EntityFactory {
         ), Duration.seconds(0.5));
 
         return entityBuilder()
-                .at(data.getX(), data.getY())
+                .atAnchored(new Point2D(24,24), new Point2D(data.getX() + 24, data.getY() + 24))
+                .with(new Bomb(48))
                 .view(new AnimatedTexture(channel).loop())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .buildAndAttach();

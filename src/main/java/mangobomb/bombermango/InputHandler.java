@@ -38,7 +38,7 @@ public class InputHandler {
     static UserAction implantBomb = new UserAction("implantBomb") {
         @Override
         protected void onActionBegin() {
-            FXGL.getGameWorld().spawn("Bomb", player.getX(), player.getY());
+            HelloApplication.playerComponent.placeBomb();
         }
     };
 }

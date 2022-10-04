@@ -3,6 +3,7 @@ package mangobomb.bombermango;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.Viewport;
+import com.almasb.fxgl.core.math.FXGLMath;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.level.Level;
@@ -91,6 +92,13 @@ public class HelloApplication extends GameApplication {
         input.addAction(InputHandler.moveDown, KeyCode.S);
         input.addAction(InputHandler.implantBomb, KeyCode.F);
 
+    }
+
+    public void brickDestroyed(Entity brick) {
+        int cellX = (int)((brick.getX()) / SCALED_SIZE);
+        int cellY = (int)((brick.getY()) / SCALED_SIZE);
+
+        grid.get(cellX, cellY).setState(CellState.WALKABLE);
     }
 
     public static void main(String[] args) {
