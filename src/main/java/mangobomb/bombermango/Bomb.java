@@ -16,10 +16,9 @@ public class Bomb extends Component {
     public void explode() {
         BoundingBoxComponent box = entity.getBoundingBoxComponent();
 
-        var list = getGameWorld()
-                .getEntitiesInRange(box.range(radius, radius));
-        System.out.println(list.size());
-        list.stream()
+        getGameWorld()
+                .getEntitiesInRange(box.range(radius, radius))
+                .stream()
                 .filter(e -> e.isType(BombermanType.BRICK))
                 .forEach(e -> {
                     FXGL.<HelloApplication>getAppCast().brickDestroyed(e);

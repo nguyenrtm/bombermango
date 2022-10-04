@@ -157,15 +157,16 @@ public class GenerateFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("BG,2")
-    public Entity BG(SpawnData data) {
-        return entityBuilder(data)
-                .view("sprites/grass.png")
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
+    @Spawns("BG")
+    public Entity newBackground(SpawnData data) {
+        return entityBuilder()
+                .at(0, 0)
+                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT, Color.GREEN))
+                .zIndex(-1)
                 .build();
     }
 
-    @Spawns("GreyBG,3")
+    @Spawns("GreyBG,2")
     public Entity newGreyBG(SpawnData data) {
         return entityBuilder(data)
                 .view(new Rectangle(SCALED_SIZE, SCALED_SIZE, Color.GREY))

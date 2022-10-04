@@ -65,6 +65,8 @@ public class HelloApplication extends GameApplication {
         Level level = getAssetLoader().loadLevel("test.txt", new TextLevelLoader(48, 48, ' '));
         gameworld.setLevel(level);
 
+        spawn("BG");
+
         grid = AStarGrid.fromWorld(gameworld, 21, 13, 48, 48, type -> {
             if (type.equals(WALL) || type.equals(BRICK) || type.equals(BG))
                 return CellState.NOT_WALKABLE;
@@ -72,9 +74,7 @@ public class HelloApplication extends GameApplication {
             return CellState.WALKABLE;
         });
 
-        System.out.println(grid.getWalkableCells());
-
-        player = gameworld.spawn("Player");
+        player = spawn("Player");
         playerComponent = player.getComponent(PlayerComponent.class);
 
         Viewport viewport = getGameScene().getViewport();
