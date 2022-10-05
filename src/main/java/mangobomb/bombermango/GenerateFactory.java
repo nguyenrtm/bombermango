@@ -1,8 +1,6 @@
 package mangobomb.bombermango;
 
-import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.dsl.FXGL;
-import com.almasb.fxgl.dsl.components.ProjectileComponent;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.EntityFactory;
 import com.almasb.fxgl.entity.SpawnData;
@@ -11,19 +9,14 @@ import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.pathfinding.CellMoveComponent;
 import com.almasb.fxgl.pathfinding.astar.AStarMoveComponent;
 import com.almasb.fxgl.texture.AnimationChannel;
-import com.sun.scenario.effect.impl.sw.java.JSWBlend_GREENPeer;
-import javafx.collections.WeakListChangeListener;
 import javafx.geometry.Point2D;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-import java.awt.*;
 import java.util.List;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import static com.almasb.fxgl.dsl.FXGL.*;
-import mangobomb.bombermango.BombermanType;
-import org.jetbrains.annotations.NotNull;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.image;
 import static mangobomb.bombermango.BombermanType.*;
@@ -45,10 +38,11 @@ public class GenerateFactory implements EntityFactory {
                 .type(PLAYER)
                 .zIndex(10)
                 .view(new AnimatedTexture(channel).loop())
+                .with(new CollidableComponent(true))
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .with(new CellMoveComponent(SCALED_SIZE, SCALED_SIZE,150))
                 .with(new AStarMoveComponent(FXGL.<HelloApplication>getAppCast().getGrid()))
-                .with(new PlayerComponent())
+                .with(new Player())
                 .buildAndAttach();
     }
 
@@ -61,8 +55,10 @@ public class GenerateFactory implements EntityFactory {
         ), Duration.seconds(0.5));
 
         return entityBuilder()
+                .type(ENEMY)
                 .at(data.getX(), data.getY())
-                .view(new AnimatedTexture(channel).loop())
+                .with(new CollidableComponent(true))
+                .viewWithBBox(new AnimatedTexture(channel).loop())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
                 .buildAndAttach();
     }
@@ -183,10 +179,9 @@ public class GenerateFactory implements EntityFactory {
         ), Duration.seconds(0.5));
 
         return entityBuilder()
-                .atAnchored(new Point2D(24,24), new Point2D(data.getX() + 24, data.getY() + 24))
-                .with(new Bomb(48))
-                .view(new AnimatedTexture(channel).loop())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
+                .at(data.getX(), data.getY())
+                .with(new Bomb(data.get("radius")))
+                .viewWithBBox(new AnimatedTexture(channel).loop())
                 .buildAndAttach();
     }
 
@@ -200,11 +195,11 @@ public class GenerateFactory implements EntityFactory {
                 image("sprites/bomb_exploded.png")
         ), Duration.seconds(0.8));
 
-        return entityBuilder()
+        return entityBuilder(data)
                 .at(data.getX(), data.getY())
                 .view(new AnimatedTexture(channel).loop())
                 .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .buildAndAttach();
+                .build();
     }
 
     @Spawns("HorizontalLeft")

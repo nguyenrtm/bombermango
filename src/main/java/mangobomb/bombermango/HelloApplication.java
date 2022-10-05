@@ -3,32 +3,17 @@ package mangobomb.bombermango;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.Viewport;
-import com.almasb.fxgl.core.math.FXGLMath;
-import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.entity.level.text.TextLevelLoader;
 import com.almasb.fxgl.input.Input;
 import com.almasb.fxgl.pathfinding.CellState;
 import com.almasb.fxgl.pathfinding.astar.AStarGrid;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.input.UserAction;
-import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
-import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static mangobomb.bombermango.BombermanType.*;
-
-import java.io.IOException;
 
 public class HelloApplication extends GameApplication {
     public static final int WIDTH = 21;
@@ -40,7 +25,7 @@ public class HelloApplication extends GameApplication {
     public static final int DEFAULT_SIZE = 16;
 
     public static Entity player;
-    public static PlayerComponent playerComponent;
+    public static Player playerComponent;
     public static GameWorld gameworld;
     private static AStarGrid grid;
     public static AStarGrid getGrid() {
@@ -75,7 +60,7 @@ public class HelloApplication extends GameApplication {
         });
 
         player = spawn("Player");
-        playerComponent = player.getComponent(PlayerComponent.class);
+        playerComponent = player.getComponent(Player.class);
 
         Viewport viewport = getGameScene().getViewport();
         viewport.bindToEntity(player, 200, 100);
