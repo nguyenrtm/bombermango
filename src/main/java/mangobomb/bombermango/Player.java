@@ -13,9 +13,11 @@ import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
 public class Player extends Component {
     public CellMoveComponent cell;
     public AStarMoveComponent astar;
+    public static int life = 1;
 
     private int maxBombs = 1;
     private int bombsPlaced = 0;
+    public static boolean pass_level = false;
 
     public void increaseMaxBombs() {
         maxBombs++;
@@ -50,5 +52,10 @@ public class Player extends Component {
 
     public void moveDown() {
         astar.moveToDownCell();
+    }
+
+    public void die() {
+        life--;
+        System.out.println(life);
     }
 }
