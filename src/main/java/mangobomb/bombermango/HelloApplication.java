@@ -104,6 +104,7 @@ public class HelloApplication extends GameApplication {
         input.addAction(InputHandler.moveLeft, KeyCode.A);
         input.addAction(InputHandler.moveDown, KeyCode.S);
         input.addAction(InputHandler.implantBomb, KeyCode.F);
+        input.addAction(InputHandler.PlayMusic, KeyCode.M);
 
     }
 

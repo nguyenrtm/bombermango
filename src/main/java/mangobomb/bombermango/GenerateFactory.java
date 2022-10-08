@@ -31,23 +31,18 @@ public class GenerateFactory implements EntityFactory {
 
     @Spawns("Player")
     public Entity newPlayer(SpawnData data) {
-        var channel = new AnimationChannel(List.of(
-                image("sprites/player_down.png"),
-                image("sprites/player_down_1.png"),
-                image("sprites/player_down_2.png")
-        ), Duration.seconds(0.5));
 
         FXGL.<HelloApplication>getAppCast();
         return entityBuilder(data)
                 .atAnchored(new Point2D(24, 24), new Point2D(72, 168))
                 .type(PLAYER)
                 .zIndex(10)
-                .viewWithBBox(new AnimatedTexture(channel).loop())
+                .bbox(new HitBox(new Point2D(24, 24), BoundingShape.box(24, 24)))
                 .with(new CollidableComponent(true))
                 .with(new CellMoveComponent(SCALED_SIZE, SCALED_SIZE,150))
                 .with(new AStarMoveComponent(FXGL.<HelloApplication>getAppCast().getGrid()))
                 .with(new Player())
-                .buildAndAttach();
+                .build();
     }
 
     @Spawns("EnemyBalloom")
@@ -135,7 +130,7 @@ public class GenerateFactory implements EntityFactory {
     public Entity newPortal(SpawnData data) {
         return entityBuilder()
                 .view("sprites/portal.png")
-                .bbox(new HitBox(new Point2D(24, 24), BoundingShape.box(SCALED_SIZE - 10, SCALED_SIZE - 10)))
+                .bbox(new HitBox(new Point2D(24, 24), BoundingShape.box(1, 1)))
                 .at(data.getX(), data.getY())
                 .with(new CollidableComponent(true))
                 .type(PORTAL)

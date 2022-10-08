@@ -41,4 +41,16 @@ public class InputHandler {
             HelloApplication.playerComponent.placeBomb();
         }
     };
+
+    static  UserAction PlayMusic = new UserAction("PlayMusic") {
+        @Override
+        protected void onAction() {
+            HelloApplication.playerComponent.music();
+//            Music gamemusic = getAssetLoader().loadMusic("gameaudio.wav");
+//            getAudioPlayer().playMusic(gamemusic);
+            //FXGL.play("gameaudio.wav");
+
+
+        }
+    };
 }
