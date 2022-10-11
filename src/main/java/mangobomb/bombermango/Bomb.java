@@ -26,6 +26,9 @@ public class Bomb extends Component {
                 .filter(e -> e.isType(BombermanType.BALLOOM) || e.isType(BombermanType.BRICK))
                 .forEach(e -> {
                     FXGL.<HelloApplication>getAppCast().brickDestroyed(e);
+                    if (e.isType(BombermanType.BALLOOM)) {
+                        FXGL.<HelloApplication>getAppCast().balloomDestroyed(e);
+                    }
                     e.removeFromWorld();
                 });
         entity.removeFromWorld();

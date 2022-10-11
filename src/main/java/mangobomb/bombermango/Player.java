@@ -16,6 +16,7 @@ import java.util.List;
 
 import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
 import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
+import static mangobomb.bombermango.HelloApplication.balloom_number;
 
 public class Player extends Component {
     public CellMoveComponent cell;
@@ -125,8 +126,13 @@ public class Player extends Component {
 
     }
 
+    public void checkPassLevel() {
+        if (balloom_number == 0) {
+            pass_level = true;
+        }
+    }
+
     public void die() {
         life--;
-        System.out.println(life);
     }
 }

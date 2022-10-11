@@ -9,28 +9,28 @@ public class InputHandler {
 
     static UserAction moveUp = new UserAction("moveUp") {
         @Override
-        protected void onActionBegin() {
+        protected void onAction() {
             HelloApplication.playerComponent.moveUp();
         }
     };
 
     static UserAction moveDown = new UserAction("moveDown") {
         @Override
-        protected void onActionBegin() {
+        protected void onAction() {
             HelloApplication.playerComponent.moveDown();
         }
     };
 
     static UserAction moveRight = new UserAction("moveRight") {
         @Override
-        protected void onActionBegin() {
+        protected void onAction() {
             HelloApplication.playerComponent.moveRight();
         }
     };
 
     static UserAction moveLeft = new UserAction("moveLeft") {
         @Override
-        protected void onActionBegin() {
+        protected void onAction() {
             HelloApplication.playerComponent.moveLeft();
         }
     };

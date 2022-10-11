@@ -186,7 +186,7 @@ public class GenerateFactory implements EntityFactory {
                 .with(new Bomb(data.get("radius")))
                 .with(new CollidableComponent(true))
                 .viewWithBBox(new AnimatedTexture(channel).loop())
-                .buildAndAttach();
+                .build();
     }
 
     @Spawns("BombExploded")
