@@ -8,7 +8,7 @@
 - Nút *M* có thể được dùng để bật nhạc khi chơi.
 - Ấn vào *New game* trong menu để bắt đầu trò chơi.
 - Trò chơi sẽ có 2 level, khi vượt qua hết 2 level này thì người chơi sẽ thắng cuộc.
-- Mỗi level sẽ có 300 giây để chơi, khi hết thời gian này thì bạn sẽ thua.
+- Mỗi level sẽ có 150 giây để chơi, khi hết thời gian này thì bạn sẽ thua.
 ## Các đối tượng trong trò chơi
 ### Người chơi
 *Player* là đối tượng người chơi, được điều khiển qua các phím:
