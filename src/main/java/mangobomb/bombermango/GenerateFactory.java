@@ -43,7 +43,7 @@ public class GenerateFactory implements EntityFactory {
                 .atAnchored(new Point2D(24, 24), new Point2D(72, 168))
                 .type(PLAYER)
                 .zIndex(10)
-                .bbox(new HitBox(new Point2D(24, 24), BoundingShape.box(24, 24)))
+                .bbox(new HitBox(BoundingShape.circle(22)))
                 .with(new CollidableComponent(true))
                 .with(new CellMoveComponent(SCALED_SIZE, SCALED_SIZE,Player.PLAYER_SPEED))
                 .with(new AStarMoveComponent(FXGL.<HelloApplication>getAppCast().getGrid()))
@@ -190,7 +190,7 @@ public class GenerateFactory implements EntityFactory {
     public Entity newBackground(SpawnData data) {
         return entityBuilder()
                 .at(0, 0)
-                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT, Color.GREEN))
+                .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT, Color.LIGHTGREEN))
                 .zIndex(-10)
                 .build();
     }

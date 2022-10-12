@@ -11,6 +11,7 @@ import static mangobomb.bombermango.HelloApplication.*;
 
 public class InputHandler {
 
+    public static boolean playingMusic = false;
     static UserAction moveUp = new UserAction("moveUp") {
         @Override
         protected void onAction() {
@@ -50,18 +51,8 @@ public class InputHandler {
         @Override
         protected void onAction() {
             HelloApplication.playerComponent.music();
-            //Music gamemusic = getAssetLoader().loadMusic("gameaudio.wav");
-            //getAudioPlayer().playMusic(gamemusic);
-            //FXGL.play("gameaudio.wav");
-
 
         }
     };
 
-    static UserAction Pause = new UserAction("Pause") {
-        @Override
-        protected void onActionBegin() {
-            getGameController().gotoGameMenu();
-        }
-    };
 }

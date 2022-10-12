@@ -101,22 +101,23 @@ public class HelloApplication extends GameApplication {
 
 
         if (level_number == 1) {
+            set("level", 1);
             portal_img = spawn("Portal", 24 * SCALED_SIZE, 4 * SCALED_SIZE);
             portal = portal_img.getComponent(Portal.class);
-            oneal_number = 2;
-            balloom_number = 3;
-            doll_number = 1;
+            oneal_number = 0;
+            balloom_number = 0;
+            doll_number = 0;
             spawn("PowerupBomb", 3 * SCALED_SIZE, 4 * SCALED_SIZE);
             spawn("PowerupBomb", 7 * SCALED_SIZE, 4 * SCALED_SIZE);
             spawn("PowerupFlame", 1 * SCALED_SIZE, 6 * SCALED_SIZE);
             spawn("PowerupBomb", 12 * SCALED_SIZE, 12 * SCALED_SIZE);
         } else if (level_number == 2) {
-            set("level", 2);
+            set("level", level_number);
             portal_img = spawn("Portal", 19 * SCALED_SIZE, 7 * SCALED_SIZE);
             portal = portal_img.getComponent(Portal.class);
-            oneal_number = 3;
-            balloom_number = 4;
-            doll_number = 3;
+            oneal_number = 0;
+            balloom_number = 0;
+            doll_number = 0;
             spawn("PowerupBomb", 10 * SCALED_SIZE, 2 * SCALED_SIZE);
             spawn("PowerupBomb", 9 * SCALED_SIZE, 8 * SCALED_SIZE);
             spawn("PowerupFlame", 22 * SCALED_SIZE, 12 * SCALED_SIZE);
@@ -141,6 +142,14 @@ public class HelloApplication extends GameApplication {
 
     public void loadNewLevel() {
         if (level_number > max_level) {
+            level_number = 1;
+            player_score = 0;
+            Player.maxBombs = 1;
+            Player.bomb_set_radius = 24;
+            set("level", 1);
+            set("score", 0);
+            set("bomb_number", 1);
+            set("time", 150);
             showMessage("Congratulations! You won the game", () -> getGameController().gotoMainMenu());
         } else {
             setLevel(level_number);
@@ -166,7 +175,6 @@ public class HelloApplication extends GameApplication {
 
         if (Player.pass_level == true) {
             level_number++;
-            inc("level", 1);
             Player.pass_level = false;
             loadNewLevel();
         }
@@ -201,7 +209,6 @@ public class HelloApplication extends GameApplication {
         input.addAction(InputHandler.moveDown, KeyCode.S);
         input.addAction(InputHandler.implantBomb, KeyCode.F);
         input.addAction(InputHandler.PlayMusic, KeyCode.M);
-        input.addAction(InputHandler.Pause, KeyCode.P);
 
     }
 
