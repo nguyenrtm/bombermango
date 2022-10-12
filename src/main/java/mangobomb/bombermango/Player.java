@@ -89,7 +89,7 @@ public class Player extends Component {
 
     @Override
     public void onUpdate(double tpf) {
-        if (cell.isMoving() || cell.isMovingRight()) {
+        if (cell.isMovingLeft() || cell.isMovingRight()) {
             if (texture.getAnimationChannel() != PlayerLeft) {
                 texture.loopAnimationChannel(PlayerLeft);
             }

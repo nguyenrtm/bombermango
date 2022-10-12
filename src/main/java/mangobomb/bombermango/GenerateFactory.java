@@ -166,6 +166,13 @@ public class GenerateFactory implements EntityFactory {
                 .type(WALL)
                 .build();
     }
+    @Spawns("GreyBG,2")
+    public Entity newGreyBG(SpawnData data) {
+        return entityBuilder(data)
+                .view(new Rectangle(SCALED_SIZE, SCALED_SIZE, Color.GREY))
+                .type(BG)
+                .build();
+    }
 
     @Spawns("BG")
     public Entity newBackground(SpawnData data) {
