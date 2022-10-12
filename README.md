@@ -20,7 +20,7 @@ Ngoài ra, *Player* có chức năng đặt *Bomb* khi nhấn phím *F*.
 *Bomb* là đối tượng bom. Khi *Bomb* được đặt bởi *Player*, sau một khoảng 3 giây sẽ nổ, phá hủy các đối tượng *Enemy*, *Brick*, cũng như cả *Player* nếu những đối tượng này nằm trong một vùng bán kính đã được xác định so với *Bomb*.
 ### Địch
 1. *Balloom* Đây là đối tượng địch đơn giản nhất, di chuyển ngẫu nhiên, biết chuyển hướng khi va chạm các đối tượng khác, như *Brick*, *Wall* và chuyển hướng khi va chạm với *Bomb*.
-2. *Oneal* Đây là đối tượng địch thông minh, khi phát hiện ra *Player* trong một bán kính nhất địch sẽ biết đi theo đường đi ngắn nhất đến *Player* (với điều kiện tồn tại một lối đi đến *Player* mà không có *Brick* hay *Wall*), khi *Player* nằm ngoài bán kính đó thì đối tượng này sẽ di chuyển ngẫu nhiên.
+2. *Oneal* Đây là đối tượng địch thông minh, khi phát hiện ra *Player* trong một bán kính nhất địch sẽ biết đi theo đường đi ngắn nhất đến *Player* (với điều kiện tồn tại một lối đi đến *Player* mà không có *Brick* hay *Wall*), khi *Player* nằm ngoài bán kính đó thì đối tượng này sẽ di chuyển ngẫu nhiên. Ngoài ra, *Oneal* còn có thể đi xuyên qua bom. Có thể nói là đối tượng này khá nguy hiểm.
 3. *Doll* Đây là đối tượng địch giống di chuyển ngẫu nhiên giống như *Balloom* nhưng tốc độ di chuyển được cải thiện so với *Balloom*.
 ### Power up
 Các đối tượng powerup được ẩn dưới các đối tượng *Brick*, sẽ lộ ra khi *Player* dùng *Bomb* để phá hủy các *Brick* đó.
