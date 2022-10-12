@@ -14,21 +14,29 @@ import javafx.util.Duration;
 
 import java.util.List;
 
-import static com.almasb.fxgl.dsl.FXGLForKtKt.getGameTimer;
-import static com.almasb.fxgl.dsl.FXGLForKtKt.spawn;
-import static mangobomb.bombermango.HelloApplication.balloom_number;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.*;
+import static mangobomb.bombermango.HelloApplication.*;
 
 public class Player extends Component {
     public CellMoveComponent cell;
     public AStarMoveComponent astar;
     public static int life = 1;
+    public static int PLAYER_SPEED = 200;
 
-    private int maxBombs = 1;
+    public static int maxBombs = 1;
     private int bombsPlaced = 0;
     public static boolean pass_level = false;
+    public static int bomb_set_radius = 24;
 
     public void increaseMaxBombs() {
         maxBombs++;
+        inc("bomb_number", 1);
+    }
+
+    public void increaseSpeed() { PLAYER_SPEED += 100; }
+    public static void increaseRadius() {
+        bomb_set_radius += 24;
+        inc("bomb_radius", 1);
     }
 
     public void placeBomb() {
@@ -38,7 +46,7 @@ public class Player extends Component {
 
         bombsPlaced++;
 
-        Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 48, cell.getCellY() * 48).put("radius", HelloApplication.SCALED_SIZE / 2));
+        Entity bomb = spawn("Bomb", new SpawnData(cell.getCellX() * 48, cell.getCellY() * 48).put("radius", bomb_set_radius));
 
         getGameTimer().runOnceAfter(() -> {
             bomb.getComponent(Bomb.class).explode();
@@ -127,7 +135,7 @@ public class Player extends Component {
     }
 
     public void checkPassLevel() {
-        if (balloom_number == 0) {
+        if ((balloom_number == 0) && (oneal_number == 0) && (doll_number == 0)) {
             pass_level = true;
         }
     }

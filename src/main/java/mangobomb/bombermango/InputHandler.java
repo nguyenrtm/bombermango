@@ -1,8 +1,12 @@
 package mangobomb.bombermango;
 
+import com.almasb.fxgl.audio.Music;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.input.UserAction;
 
+import static com.almasb.fxgl.dsl.FXGL.getGameController;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.getAssetLoader;
+import static com.almasb.fxgl.dsl.FXGLForKtKt.getAudioPlayer;
 import static mangobomb.bombermango.HelloApplication.*;
 
 public class InputHandler {
@@ -46,11 +50,18 @@ public class InputHandler {
         @Override
         protected void onAction() {
             HelloApplication.playerComponent.music();
-//            Music gamemusic = getAssetLoader().loadMusic("gameaudio.wav");
-//            getAudioPlayer().playMusic(gamemusic);
+            //Music gamemusic = getAssetLoader().loadMusic("gameaudio.wav");
+            //getAudioPlayer().playMusic(gamemusic);
             //FXGL.play("gameaudio.wav");
 
 
+        }
+    };
+
+    static UserAction Pause = new UserAction("Pause") {
+        @Override
+        protected void onActionBegin() {
+            getGameController().gotoGameMenu();
         }
     };
 }
