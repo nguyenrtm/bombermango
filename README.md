@@ -1,5 +1,6 @@
 # Game Bomberman
 ![alt text](https://github.com/nguyenrtm/bombermango/blob/master/screenshot.png?raw=true)
+![alt text](https://github.com/nguyenrtm/bombermango/blob/master/umldiagram.svg?raw=true)
 ## Các thành viên
 1. Nguyễn Bình Nguyên
 2. Đào Thị Kim Thịnh
