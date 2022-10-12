@@ -40,7 +40,7 @@ public class GenerateFactory implements EntityFactory {
 
         FXGL.<HelloApplication>getAppCast();
         return entityBuilder(data)
-                .atAnchored(new Point2D(24, 24), new Point2D(72, 168))
+                .atAnchored(new Point2D(24, 24), new Point2D(72, 120))
                 .type(PLAYER)
                 .zIndex(10)
                 .bbox(new HitBox(BoundingShape.circle(22)))

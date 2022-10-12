@@ -1,0 +1,169 @@
+@startuml Bomberman
+class Bomb extends Component {
+    - radius: int
+    + Bomb(radius)
+    + explode()
+}
+enum Bombermantype {
+    - PLAYER
+    - WALL
+    - BRICK
+    - BOMB
+    - POWERUP_BOMB
+    - POWERUP_FLAME
+    - BG
+    - BALLOOM
+    - DOLL
+    - ONEAL
+    - PORTAL
+}
+class GenerateFactory implements EntityFactory {
+    + newPlayer(data)
+    + newEnemyBalloom(data)
+    + newEnemyDoll(data)
+    + newEnemyOneal(data)
+    + newPowerupBomb(data)
+    + newPowerupFlame(data)
+    + newPortal(data)
+    + newBrick(data)
+    + newWall(data)
+    + newGreyBG(data)
+    + newBomb(data)
+    + newBombExploded(data)
+    + newBalloomExploded(data)
+    + newOnealExploded(data)
+    + newDollExploded(data)
+}
+
+class HelloApplication extends GameApplication {
+    - WIDTH: int
+    - HEIGHT: int
+    - SCALED_SIZE: int
+    - SCREEN_WIDTH: int
+    - SCREEN_HEIGHT: int
+    - ZOOM_RATIO: int
+    - DEFAULT_SIZE: int
+    - player_score: int
+    - level_number: int
+    - max_level: int
+    - playtime: int
+    - balloom_number: int
+    - oneal_number: int
+    - doll_number: int
+    - player: Entity
+    - portal_img: Entity
+    - balloom_ent: Entity
+    - oneal_ent: Entity
+    - playerComponent: Player
+    - portal: Portal
+    - balloom: Balloom
+    - gameworld: GameWorld
+    - grid: AStarGrid
+    + getGrid()
+    + initSettings(settings)
+    + initGame()
+    + setLevel(level_number)
+    + initGameVars(vars)
+    + countdown()
+    + loadNewLevel()
+    + onUpdate(tpf)
+    + initUI()
+    + initInput()
+    + brickDestroyed(brick)
+    + balloomDestroyed(balloom)
+    + onealDestroyed(oneal)
+    + dollDestroyed(doll)
+    + main(args)
+
+}
+class InputHandler {
+    - playingMusic: boolean
+    - moveUp: UserAction
+    - moveDown: UserAction
+    - moveRight: UserAction
+    - moveLeft: UserAction
+    - implantBomb: UserAction
+    - PlayMusic: UserAction
+}
+class Player extends Component {
+    - cell: CellMoveComponent
+    - astar: AStarMoveComponent
+    - life: int
+    - PLAYER_SPEED: int
+    - maxBombs: int
+    - bombsPlaced: int
+    - pass_level: boolean
+    - bomb_set_radius: int
+    - texture: AnimatedTexture
+    - PlayerLeft: AnimationChannel
+    - PlayerRight: AnimationChannel
+    - PlayerIdle: AnimationChannel
+    - gameSong: String
+    - gameMusic: Music
+    - playing: boolean
+    + increaseMaxBombs()
+    + increaseSpeed()
+    + placeBomb()
+    + Player()
+    + onAdded()
+    + onUpdate(tpf)
+    + moveRight()
+    + moveLeft()
+    + moveUp()
+    + moveDown()
+    + music()
+    + checkPassLevel()
+    + die()
+}
+
+class Portal extends Component {
+    + Portal()
+}
+
+package "powerup" #DDDDDD {
+    class PowerupBomb extends Component {
+        + PowerupBomb()
+    }
+
+    class PowerupFlame extends Component {
+        + PowerupFlame()
+    }
+}
+
+package "enemy" #DDDDDD {
+    Enemy <|-- Oneal
+    Enemy <|-- Doll
+    Enemy <|-- Balloom
+    class Enemy extends Component {
+        - ENEMY_SPEED: int
+        - detect: int
+        - x_speed: int
+        - y_speed: int
+        - Direction: enum
+        + setTurn(turn)
+        + getRandom()
+        + onUpdate(tpf)
+        + turn()
+        + isPlayerDetected()
+    }
+
+    class Balloom {
+        + Balloom()
+    }
+    class Doll {
+        + Doll()
+        + getRandom()
+    }
+    class Oneal {
+        - lastX: double
+        - lastY: double
+        - cell: CellMoveComponent
+        - astar: AStarMoveComponent
+        + Oneal()
+        + onUpdate(tpf)
+        + undetectedMove(tpf)
+        + detectedMove()
+    }
+
+}
+@enduml
