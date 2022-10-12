@@ -104,9 +104,9 @@ public class HelloApplication extends GameApplication {
             set("level", 1);
             portal_img = spawn("Portal", 24 * SCALED_SIZE, 4 * SCALED_SIZE);
             portal = portal_img.getComponent(Portal.class);
-            oneal_number = 0;
-            balloom_number = 0;
-            doll_number = 0;
+            balloom_number = 3;
+            oneal_number = 2;
+            doll_number = 1;
             spawn("PowerupBomb", 3 * SCALED_SIZE, 4 * SCALED_SIZE);
             spawn("PowerupBomb", 7 * SCALED_SIZE, 4 * SCALED_SIZE);
             spawn("PowerupFlame", 1 * SCALED_SIZE, 6 * SCALED_SIZE);
@@ -115,9 +115,9 @@ public class HelloApplication extends GameApplication {
             set("level", level_number);
             portal_img = spawn("Portal", 19 * SCALED_SIZE, 7 * SCALED_SIZE);
             portal = portal_img.getComponent(Portal.class);
-            oneal_number = 0;
-            balloom_number = 0;
-            doll_number = 0;
+            oneal_number = 2;
+            balloom_number = 4;
+            doll_number = 2;
             spawn("PowerupBomb", 10 * SCALED_SIZE, 2 * SCALED_SIZE);
             spawn("PowerupBomb", 9 * SCALED_SIZE, 8 * SCALED_SIZE);
             spawn("PowerupFlame", 22 * SCALED_SIZE, 12 * SCALED_SIZE);

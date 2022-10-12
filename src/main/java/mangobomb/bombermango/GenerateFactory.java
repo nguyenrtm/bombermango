@@ -108,15 +108,6 @@ public class GenerateFactory implements EntityFactory {
                 .build();
     }
 
-    @Spawns("PowerupPass")
-    public Entity newPowerupPass(SpawnData data) {
-        return entityBuilder()
-                .view("sprites/powerup_bombpass.png")
-                .at(data.getX(), data.getY())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .type(POWERUP)
-                .build();
-    }
     @Spawns("PowerupBomb,x")
     public Entity newPowerupBomb(SpawnData data) {
         return entityBuilder(data)
@@ -127,16 +118,6 @@ public class GenerateFactory implements EntityFactory {
                 .type(POWERUP_BOMB)
                 .with(new CollidableComponent(true))
                 .zIndex(-5)
-                .build();
-    }
-
-    @Spawns("PowerupDetonator")
-    public Entity newPowerupDetonator(SpawnData data) {
-        return entityBuilder()
-                .view("sprites/powerup_detonator.png")
-                .at(data.getX(), data.getY())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .type(POWERUP)
                 .build();
     }
 
@@ -192,14 +173,6 @@ public class GenerateFactory implements EntityFactory {
                 .at(0, 0)
                 .view(new Rectangle(HelloApplication.SCREEN_WIDTH, HelloApplication.SCREEN_HEIGHT, Color.LIGHTGREEN))
                 .zIndex(-10)
-                .build();
-    }
-
-    @Spawns("GreyBG,2")
-    public Entity newGreyBG(SpawnData data) {
-        return entityBuilder(data)
-                .view(new Rectangle(SCALED_SIZE, SCALED_SIZE, Color.GREY))
-                .type(BG)
                 .build();
     }
 
@@ -265,75 +238,5 @@ public class GenerateFactory implements EntityFactory {
                 .scale(2.8, 2.8)
                 .build();
     }
-
-    @Spawns("HorizontalLeft")
-    public Entity newHorizontalLeft(SpawnData data) {
-        var channel = new AnimationChannel(List.of(
-                image("sprites/explosion_horizontal_left_last.png"),
-                image("sprites/explosion_horizontal_left_last1.png"),
-                image("sprites/explosion_horizontal_left_last2.png"),
-                image("sprites/explosion_horizontal_left_last1.png"),
-                image("sprites/explosion_horizontal_left_last.png")
-        ), Duration.seconds(0.8));
-
-        return entityBuilder()
-                .at(data.getX(), data.getY())
-                .view(new AnimatedTexture(channel).loop())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .buildAndAttach();
-    }
-
-    @Spawns("HorizontalRight")
-    public Entity newHorizontalRight(SpawnData data) {
-        var channel = new AnimationChannel(List.of(
-                image("sprites/explosion_horizontal_right_last.png"),
-                image("sprites/explosion_horizontal_right_last1.png"),
-                image("sprites/explosion_horizontal_right_last2.png"),
-                image("sprites/explosion_horizontal_right_last1.png"),
-                image("sprites/explosion_horizontal_right_last.png")
-        ), Duration.seconds(0.8));
-
-        return entityBuilder()
-                .at(data.getX(), data.getY())
-                .view(new AnimatedTexture(channel).loop())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .buildAndAttach();
-    }
-
-    @Spawns("VerticalTop")
-    public Entity newVerticalTop(SpawnData data) {
-        var channel = new AnimationChannel(List.of(
-                image("sprites/explosion_vertical_top_last.png"),
-                image("sprites/explosion_vertical_top_last1.png"),
-                image("sprites/explosion_vertical_top_last2.png"),
-                image("sprites/explosion_vertical_top_last1.png"),
-                image("sprites/explosion_vertical_top_last.png")
-        ), Duration.seconds(0.8));
-
-        return entityBuilder()
-                .at(data.getX(), data.getY())
-                .view(new AnimatedTexture(channel).loop())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .buildAndAttach();
-    }
-
-    @Spawns("VerticalDown")
-    public Entity newVerticalDown(SpawnData data) {
-        var channel = new AnimationChannel(List.of(
-                image("sprites/explosion_vertical_down_last.png"),
-                image("sprites/explosion_vertical_down_last1.png"),
-                image("sprites/explosion_vertical_down_last2.png"),
-                image("sprites/explosion_vertical_down_last1.png"),
-                image("sprites/explosion_vertical_down_last.png")
-        ), Duration.seconds(0.8));
-
-        return entityBuilder()
-                .at(data.getX(), data.getY())
-                .view(new AnimatedTexture(channel).loop())
-                .scale(HelloApplication.ZOOM_RATIO, HelloApplication.ZOOM_RATIO)
-                .buildAndAttach();
-    }
-
-
 
 }
